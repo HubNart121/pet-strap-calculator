@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PET Strapping Tensile Strength Calculator</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="glass-pill">Engineering Tool v1.0</div>
+            <h1>PET Strapping Calculator</h1>
+            <p>เครื่องมือคำนวณและออกรายงานค่าแรงดึงสำหรับสายรัดพลาสติก PET</p>
+        </header>
+
+        <div class="app-grid">
+            <!-- Input Section -->
+            <div class="input-section">
+                <div class="card">
+                    <h3 style="margin-bottom: 20px;">1. ข้อมูลการทดสอบ</h3>
+                    <div class="form-group">
+                        <label for="material-name">ชื่อวัสดุ / รุ่น</label>
+                        <input type="text" id="material-name" placeholder="เช่น PET Strap 16mm Green">
+                    </div>
+                    <div class="form-group">
+                        <label for="batch-no">Lot / Batch No.</label>
+                        <input type="text" id="batch-no" placeholder="B2024-001">
+                    </div>
+
+                    <h3 style="margin-bottom: 20px; margin-top: 30px;">2. ขนาดสายรัด (Dimensions)</h3>
+                    <div class="app-grid" style="gap: 15px;">
+                        <div class="form-group">
+                            <label for="width">ความกว้าง (Width)</label>
+                            <input type="number" id="width" step="0.1" placeholder="0.0" data-unit="mm">
+                        </div>
+                        <div class="form-group">
+                            <label for="thickness">ความหนา (Thickness)</label>
+                            <input type="number" id="thickness" step="0.01" placeholder="0.0" data-unit="mm">
+                        </div>
+                    </div>
+
+                    <h3 style="margin-bottom: 20px; margin-top: 30px;">3. ผลการทดสอบ (Test Results)</h3>
+                    <div class="form-group">
+                        <label for="break-strength">แรงดึงขาด (Break Strength)</label>
+                        <input type="number" id="break-strength" step="1" placeholder="0" data-unit="N">
+                    </div>
+                    <div class="form-group">
+                        <label for="elongation">การยืดตัว (Elongation)</label>
+                        <input type="number" id="elongation" step="0.1" placeholder="0.0" data-unit="%">
+                    </div>
+                    <div class="form-group">
+                        <label for="joint-type">ประเภทจุดต่อ (Joint Type)</label>
+                        <select id="joint-type">
+                            <option value="none">สายรัดเปล่า (No Joint)</option>
+                            <option value="friction">เชื่อมด้วยความร้อน (Friction Weld)</option>
+                            <option value="seal">ใช้กิ๊บเหล็ก (Steel Seal)</option>
+                        </select>
+                    </div>
+
+                    <button class="btn btn-primary" id="calculate-btn">คำนวณและบันทึก</button>
+                </div>
+            </div>
+
+            <!-- Dashboard/Preview Section -->
+            <div class="preview-section">
+                <div class="card result-display">
+                    <h3>สถานะปัจจุบัน</h3>
+                    <div id="status-icon" style="font-size: 3rem; margin: 10px 0;">⚡</div>
+                    <div class="result-value" id="tensile-strength-val">0.00</div>
+                    <div class="result-unit">Tensile Strength (MPa)</div>
+                    
+                    <div style="margin-top: 30px; text-align: left;">
+                        <div class="report-item">
+                            <span class="label">พื้นที่หน้าตัด (Area)</span>
+                            <span class="value" id="area-val">0.00 mm²</span>
+                        </div>
+                        <div id="joint-efficiency-container" class="report-item" style="display: none;">
+                            <span class="label">Joint Efficiency</span>
+                            <span class="value" id="joint-eff-val">0%</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Report Section -->
+                <div class="card report-card" id="report-output" style="margin-top: 30px;">
+                    <div class="report-header">
+                        <h3 id="report-title">Final Report</h3>
+                        <span id="report-date" style="font-size: 0.8rem; color: var(--text-dim);">-- / -- / --</span>
+                    </div>
+                    <div id="report-content">
+                        <p style="text-align: center; color: var(--text-dim); padding: 20px;">ป้อนข้อมูลเพื่อสร้างรายงาน</p>
+                    </div>
+                    <button class="btn btn-primary" id="print-btn" style="display: none; background: #334155;">
+                        พิมพ์รายงาน (PDF)
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
